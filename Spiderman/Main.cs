@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using HtmlAgilityPack;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
 
 namespace Spiderman
@@ -28,7 +29,7 @@ namespace Spiderman
             bool result = Uri.TryCreate(urlTxtBox.Text, UriKind.Absolute, out uriResult) && uriResult.Scheme == Uri.UriSchemeHttp;
 
             // Check to for earch parameters
-            if (searchParameters.CheckedItems.Count == 0)
+            if (searchParametersLink.CheckedItems.Count == 0 && searchParametersImg.CheckedItems.Count == 0)
             {
                 MessageBox.Show("You need to select some search parameters before continuing.", 
                     "Error", 
@@ -64,13 +65,14 @@ namespace Spiderman
                     eventLogTxt.Text += "HTML downloaded.\n";
                     currentTaskLabel.Text = "Current Task: HTML Downloaded";
 
+                    // PARSE FOR LINKS
                     IEnumerable<HtmlNode> links = htmlDoc.DocumentNode.Descendants("a").Where(x => x.Attributes.Contains("href"));
                     int counter = 0;
                     int progress = 1; // for progress bar
 
-                    currentTaskLabel.Text = "Current Task: Parsing HTML";
+                    currentTaskLabel.Text = "Current Task: Parsing HTML for Links";
 
-                    foreach (object itemChecked in searchParameters.CheckedItems)
+                    foreach (object itemChecked in searchParametersLink.CheckedItems)
                     {
                         foreach (var link in links)
                         {
@@ -82,8 +84,46 @@ namespace Spiderman
                         }
 
                         // Progress bar update
-                        progBar.Value = (100 / searchParameters.CheckedItems.Count) * (progress);
-                        progLabel.Text = ((100 / searchParameters.CheckedItems.Count) * (progress)).ToString() + "%";
+                        progBar.Value = (100 / searchParametersLink.CheckedItems.Count) * (progress);
+                        progLabel.Text = ((100 / searchParametersLink.CheckedItems.Count) * (progress)).ToString() + "%";
+                        progress++;
+
+                        // Event log update
+                        eventLogTxt.Text += "Found " + counter.ToString() + " ." + itemChecked.ToString() + " files.\n";
+                        counter = 0;
+                    }
+
+                    // PARSE FOR IMAGES
+                    IEnumerable<HtmlNode> images = htmlDoc.DocumentNode.Descendants("img").Where(x => x.Attributes.Contains("src"));
+                    IEnumerable<HtmlNode> images_link = htmlDoc.DocumentNode.Descendants("a").Where(x => x.Attributes.Contains("href"));
+                    counter = 0;
+                    progress = 1; // for progress bar
+
+                    currentTaskLabel.Text = "Current Task: Parsing HTML for Images";
+
+                    foreach (object itemChecked in searchParametersImg.CheckedItems)
+                    {
+                        foreach (var image in images)
+                        {
+                            if (image.Attributes["src"].Value.Contains(itemChecked.ToString()))
+                            {
+                                parsedDataDisplay.Items.Add(image.Attributes["src"].Value);
+                                counter++;
+                            }
+                        }
+
+                        foreach (var image_link in images_link)
+                        {
+                            if (image_link.Attributes["href"].Value.Contains(itemChecked.ToString()))
+                            {
+                                parsedDataDisplay.Items.Add(image_link.Attributes["href"].Value);
+                                counter++;
+                            }
+                        }
+
+                        // Progress bar update
+                        progBar.Value = (100 / searchParametersImg.CheckedItems.Count) * (progress);
+                        progLabel.Text = ((100 / searchParametersImg.CheckedItems.Count) * (progress)).ToString() + "%";
                         progress++;
 
                         // Event log update

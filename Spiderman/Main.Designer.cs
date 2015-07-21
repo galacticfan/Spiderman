@@ -35,13 +35,14 @@
             this.downloadBtn = new System.Windows.Forms.Button();
             this.eLogLabel = new System.Windows.Forms.Label();
             this.eventLogTxt = new System.Windows.Forms.RichTextBox();
-            this.searchParameters = new System.Windows.Forms.CheckedListBox();
+            this.searchParametersLink = new System.Windows.Forms.CheckedListBox();
             this.searchPermLabel = new System.Windows.Forms.Label();
             this.parsedLinksLabel = new System.Windows.Forms.Label();
             this.clearBtn = new System.Windows.Forms.Button();
             this.progBar = new System.Windows.Forms.ProgressBar();
             this.progLabel = new System.Windows.Forms.Label();
             this.currentTaskLabel = new System.Windows.Forms.Label();
+            this.searchParametersImg = new System.Windows.Forms.CheckedListBox();
             this.SuspendLayout();
             // 
             // urlLabel
@@ -111,23 +112,16 @@
             this.eventLogTxt.TabIndex = 6;
             this.eventLogTxt.Text = "";
             // 
-            // searchParameters
+            // searchParametersLink
             // 
-            this.searchParameters.ColumnWidth = 50;
-            this.searchParameters.FormattingEnabled = true;
-            this.searchParameters.Items.AddRange(new object[] {
+            this.searchParametersLink.ColumnWidth = 50;
+            this.searchParametersLink.FormattingEnabled = true;
+            this.searchParametersLink.Items.AddRange(new object[] {
             "mp3",
             "aac",
             "wav",
             "m4a",
             "raw",
-            "jpg",
-            "jpeg",
-            "png",
-            "gif",
-            "svg",
-            "bmp",
-            "tif",
             "flv",
             "avi",
             "mov",
@@ -138,12 +132,12 @@
             "m4p",
             "mpeg",
             "mp2"});
-            this.searchParameters.Location = new System.Drawing.Point(326, 27);
-            this.searchParameters.MultiColumn = true;
-            this.searchParameters.Name = "searchParameters";
-            this.searchParameters.ScrollAlwaysVisible = true;
-            this.searchParameters.Size = new System.Drawing.Size(245, 124);
-            this.searchParameters.TabIndex = 7;
+            this.searchParametersLink.Location = new System.Drawing.Point(326, 27);
+            this.searchParametersLink.MultiColumn = true;
+            this.searchParametersLink.Name = "searchParametersLink";
+            this.searchParametersLink.ScrollAlwaysVisible = true;
+            this.searchParametersLink.Size = new System.Drawing.Size(165, 124);
+            this.searchParametersLink.TabIndex = 7;
             // 
             // searchPermLabel
             // 
@@ -200,18 +194,36 @@
             this.currentTaskLabel.TabIndex = 13;
             this.currentTaskLabel.Text = "Current Task: N/A";
             // 
+            // searchParametersImg
+            // 
+            this.searchParametersImg.FormattingEnabled = true;
+            this.searchParametersImg.Items.AddRange(new object[] {
+            "jpg",
+            "jpeg",
+            "png",
+            "gif",
+            "svg",
+            "bmp",
+            "tif"});
+            this.searchParametersImg.Location = new System.Drawing.Point(497, 27);
+            this.searchParametersImg.Name = "searchParametersImg";
+            this.searchParametersImg.ScrollAlwaysVisible = true;
+            this.searchParametersImg.Size = new System.Drawing.Size(74, 124);
+            this.searchParametersImg.TabIndex = 14;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(583, 296);
+            this.Controls.Add(this.searchParametersImg);
             this.Controls.Add(this.currentTaskLabel);
             this.Controls.Add(this.progLabel);
             this.Controls.Add(this.progBar);
             this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.parsedLinksLabel);
             this.Controls.Add(this.searchPermLabel);
-            this.Controls.Add(this.searchParameters);
+            this.Controls.Add(this.searchParametersLink);
             this.Controls.Add(this.eventLogTxt);
             this.Controls.Add(this.eLogLabel);
             this.Controls.Add(this.downloadBtn);
@@ -237,13 +249,14 @@
         private System.Windows.Forms.Button downloadBtn;
         private System.Windows.Forms.Label eLogLabel;
         private System.Windows.Forms.RichTextBox eventLogTxt;
-        private System.Windows.Forms.CheckedListBox searchParameters;
+        private System.Windows.Forms.CheckedListBox searchParametersLink;
         private System.Windows.Forms.Label searchPermLabel;
         private System.Windows.Forms.Label parsedLinksLabel;
         private System.Windows.Forms.Button clearBtn;
         private System.Windows.Forms.ProgressBar progBar;
         private System.Windows.Forms.Label progLabel;
         private System.Windows.Forms.Label currentTaskLabel;
+        private System.Windows.Forms.CheckedListBox searchParametersImg;
     }
 }
 
