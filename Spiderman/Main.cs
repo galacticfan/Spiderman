@@ -20,6 +20,7 @@ namespace Spiderman
             InitializeComponent();
         }
 
+        // Parse Button Code
         private void parseBtn_Click(object sender, EventArgs e)
         {
             // Check if real url
@@ -48,18 +49,26 @@ namespace Spiderman
                     // Reset everything
                     clearBoxes();
                     progBar.Value = 0;
+                    progLabel.Text = "0%";
 
                     // Begin main code
                     string url = urlTxtBox.Text;
 
                     eventLogTxt.Text += "Downloading HTML.\n";
+                    currentTaskLabel.Text = "Current Task: Downloading HTML";
+
+                    // Get HTML
                     HtmlWeb htmlWeb = new HtmlWeb();
                     HtmlAgilityPack.HtmlDocument htmlDoc = htmlWeb.Load(url);
+
                     eventLogTxt.Text += "HTML downloaded.\n";
+                    currentTaskLabel.Text = "Current Task: HTML Downloaded";
 
                     IEnumerable<HtmlNode> links = htmlDoc.DocumentNode.Descendants("a").Where(x => x.Attributes.Contains("href"));
                     int counter = 0;
                     int progress = 1; // for progress bar
+
+                    currentTaskLabel.Text = "Current Task: Parsing HTML";
 
                     foreach (object itemChecked in searchParameters.CheckedItems)
                     {
@@ -74,6 +83,7 @@ namespace Spiderman
 
                         // Progress bar update
                         progBar.Value = (100 / searchParameters.CheckedItems.Count) * (progress);
+                        progLabel.Text = ((100 / searchParameters.CheckedItems.Count) * (progress)).ToString() + "%";
                         progress++;
 
                         // Event log update
@@ -81,6 +91,7 @@ namespace Spiderman
                         counter = 0;
                     }
 
+                    currentTaskLabel.Text = "Current Task: N/A";
 
                 }
                 catch (Exception ex)
@@ -93,6 +104,7 @@ namespace Spiderman
 
         }
 
+        // Clearing Boxes Code
         private void clearBtn_Click(object sender, EventArgs e)
         {
             clearBoxes();
@@ -106,24 +118,40 @@ namespace Spiderman
             eventLogTxt.Update();
 
             progBar.Value = 0;
+            progLabel.Text = "0%";
         }
 
+        // Download Button Code
         private void downloadBtn_Click(object sender, EventArgs e)
         {
             if (parsedDataDisplay.SelectedItems.Count != 0)
             {
-                FolderBrowserDialog fbd = new FolderBrowserDialog();
-                DialogResult result = fbd.ShowDialog();
-                if (result == DialogResult.OK)
+                try
                 {
-                    string saveLocation = fbd.SelectedPath;
-                    foreach(object selectedItem in parsedDataDisplay.SelectedItems)
+                    FolderBrowserDialog fbd = new FolderBrowserDialog();
+                    DialogResult result = fbd.ShowDialog();
+                    if (result == DialogResult.OK)
                     {
-                        WebClient wClient = new WebClient();
-                        wClient.DownloadFileCompleted += new AsyncCompletedEventHandler(completedWClient);
-                        wClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(downloadProgressChanged);
-                        wClient.DownloadFileAsync(new Uri(selectedItem.ToString()), saveLocation + "\\" + selectedItem.ToString().Split('/').Last());
+                        string saveLocation = fbd.SelectedPath;
+                        foreach (object selectedItem in parsedDataDisplay.SelectedItems)
+                        {
+                            string fileName = selectedItem.ToString().Split('/').Last();
+                            currentTaskLabel.Text = "Current Task: Downloading " + fileName;
+
+                            progLabel.Text = "0%";
+                            progBar.Value = 0;
+
+                            WebClient wClient = new WebClient();
+                            wClient.DownloadFileCompleted += new AsyncCompletedEventHandler(completedWClient);
+                            wClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(downloadProgressChanged);
+                            wClient.DownloadFileAsync(new Uri(selectedItem.ToString()), saveLocation + "\\" + fileName);
+                        }
                     }
+                    
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -138,11 +166,13 @@ namespace Spiderman
         private void downloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             progBar.Value = e.ProgressPercentage;
+            progLabel.Text = e.ProgressPercentage.ToString() + "%";
         }
 
         private void completedWClient(object sender, AsyncCompletedEventArgs e)
         {
             eventLogTxt.Text += "A file has downloaded.\n";
+            currentTaskLabel.Text = "Current Task: N/A"; // may need to be commented out
         }
 
     }

@@ -40,7 +40,8 @@
             this.parsedLinksLabel = new System.Windows.Forms.Label();
             this.clearBtn = new System.Windows.Forms.Button();
             this.progBar = new System.Windows.Forms.ProgressBar();
-            this.label1 = new System.Windows.Forms.Label();
+            this.progLabel = new System.Windows.Forms.Label();
+            this.currentTaskLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // urlLabel
@@ -73,7 +74,7 @@
             // 
             this.parsedDataDisplay.FormattingEnabled = true;
             this.parsedDataDisplay.HorizontalScrollbar = true;
-            this.parsedDataDisplay.Location = new System.Drawing.Point(15, 106);
+            this.parsedDataDisplay.Location = new System.Drawing.Point(15, 82);
             this.parsedDataDisplay.Name = "parsedDataDisplay";
             this.parsedDataDisplay.ScrollAlwaysVisible = true;
             this.parsedDataDisplay.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
@@ -93,7 +94,7 @@
             // eLogLabel
             // 
             this.eLogLabel.AutoSize = true;
-            this.eLogLabel.Location = new System.Drawing.Point(323, 139);
+            this.eLogLabel.Location = new System.Drawing.Point(323, 157);
             this.eLogLabel.Name = "eLogLabel";
             this.eLogLabel.Size = new System.Drawing.Size(59, 13);
             this.eLogLabel.TabIndex = 5;
@@ -103,7 +104,7 @@
             // 
             this.eventLogTxt.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.eventLogTxt.DetectUrls = false;
-            this.eventLogTxt.Location = new System.Drawing.Point(326, 155);
+            this.eventLogTxt.Location = new System.Drawing.Point(326, 173);
             this.eventLogTxt.Name = "eventLogTxt";
             this.eventLogTxt.ReadOnly = true;
             this.eventLogTxt.Size = new System.Drawing.Size(245, 111);
@@ -141,7 +142,7 @@
             this.searchParameters.MultiColumn = true;
             this.searchParameters.Name = "searchParameters";
             this.searchParameters.ScrollAlwaysVisible = true;
-            this.searchParameters.Size = new System.Drawing.Size(245, 109);
+            this.searchParameters.Size = new System.Drawing.Size(245, 124);
             this.searchParameters.TabIndex = 7;
             // 
             // searchPermLabel
@@ -156,7 +157,7 @@
             // parsedLinksLabel
             // 
             this.parsedLinksLabel.AutoSize = true;
-            this.parsedLinksLabel.Location = new System.Drawing.Point(12, 90);
+            this.parsedLinksLabel.Location = new System.Drawing.Point(12, 66);
             this.parsedLinksLabel.Name = "parsedLinksLabel";
             this.parsedLinksLabel.Size = new System.Drawing.Size(71, 13);
             this.parsedLinksLabel.TabIndex = 9;
@@ -174,26 +175,38 @@
             // 
             // progBar
             // 
-            this.progBar.Location = new System.Drawing.Point(12, 61);
+            this.progBar.Location = new System.Drawing.Point(15, 261);
             this.progBar.Name = "progBar";
-            this.progBar.Size = new System.Drawing.Size(302, 23);
+            this.progBar.Size = new System.Drawing.Size(255, 23);
             this.progBar.TabIndex = 11;
             // 
-            // label1
+            // progLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(143, 71);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "label1";
+            this.progLabel.AutoSize = true;
+            this.progLabel.BackColor = System.Drawing.Color.Transparent;
+            this.progLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.progLabel.Location = new System.Drawing.Point(276, 265);
+            this.progLabel.Name = "progLabel";
+            this.progLabel.Size = new System.Drawing.Size(27, 16);
+            this.progLabel.TabIndex = 12;
+            this.progLabel.Text = "0%";
+            // 
+            // currentTaskLabel
+            // 
+            this.currentTaskLabel.AutoSize = true;
+            this.currentTaskLabel.Location = new System.Drawing.Point(12, 245);
+            this.currentTaskLabel.Name = "currentTaskLabel";
+            this.currentTaskLabel.Size = new System.Drawing.Size(94, 13);
+            this.currentTaskLabel.TabIndex = 13;
+            this.currentTaskLabel.Text = "Current Task: N/A";
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(583, 278);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(583, 296);
+            this.Controls.Add(this.currentTaskLabel);
+            this.Controls.Add(this.progLabel);
             this.Controls.Add(this.progBar);
             this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.parsedLinksLabel);
@@ -229,7 +242,8 @@
         private System.Windows.Forms.Label parsedLinksLabel;
         private System.Windows.Forms.Button clearBtn;
         private System.Windows.Forms.ProgressBar progBar;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label progLabel;
+        private System.Windows.Forms.Label currentTaskLabel;
     }
 }
 
