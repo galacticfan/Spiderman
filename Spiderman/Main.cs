@@ -76,7 +76,7 @@ namespace Spiderman
                     {
                         foreach (var link in links)
                         {
-                            if (link.Attributes["href"].Value.Contains(itemChecked.ToString()))
+                            if (link.Attributes["href"].Value.ToLower().Contains(itemChecked.ToString()))
                             {
                                 parsedDataDisplay.Items.Add(link.Attributes["href"].Value);
                                 counter++;
@@ -105,16 +105,24 @@ namespace Spiderman
                     {
                         foreach (var image in images)
                         {
-                            if (image.Attributes["src"].Value.Contains(itemChecked.ToString()))
+                            if (image.Attributes["src"].Value.ToLower().Contains(itemChecked.ToString()))
                             {
-                                parsedDataDisplay.Items.Add(image.Attributes["src"].Value);
+                                if (image.Attributes["src"].Value.StartsWith("//")) // in case of different url formatting
+                                {
+                                    parsedDataDisplay.Items.Add("http://" + image.Attributes["src"].Value.TrimStart('/'));
+                                }
+                                else
+                                {
+                                    parsedDataDisplay.Items.Add(image.Attributes["src"].Value);
+                                }
+
                                 counter++;
                             }
                         }
 
                         foreach (var image_link in images_link)
                         {
-                            if (image_link.Attributes["href"].Value.Contains(itemChecked.ToString()))
+                            if (image_link.Attributes["href"].Value.ToLower().Contains(itemChecked.ToString()))
                             {
                                 parsedDataDisplay.Items.Add(image_link.Attributes["href"].Value);
                                 counter++;
