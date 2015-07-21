@@ -1,0 +1,12 @@
+c:\users\jake\documents\visual studio 2013\Projects\Spiderman\Spiderman\bin\Debug\Spiderman.exe.config
+c:\users\jake\documents\visual studio 2013\Projects\Spiderman\Spiderman\bin\Debug\Spiderman.exe
+c:\users\jake\documents\visual studio 2013\Projects\Spiderman\Spiderman\bin\Debug\Spiderman.pdb
+c:\users\jake\documents\visual studio 2013\Projects\Spiderman\Spiderman\obj\Debug\Spiderman.csprojResolveAssemblyReference.cache
+c:\users\jake\documents\visual studio 2013\Projects\Spiderman\Spiderman\obj\Debug\Spiderman.Properties.Resources.resources
+c:\users\jake\documents\visual studio 2013\Projects\Spiderman\Spiderman\obj\Debug\Spiderman.csproj.GenerateResource.Cache
+c:\users\jake\documents\visual studio 2013\Projects\Spiderman\Spiderman\obj\Debug\Spiderman.exe
+c:\users\jake\documents\visual studio 2013\Projects\Spiderman\Spiderman\obj\Debug\Spiderman.pdb
+c:\users\jake\documents\visual studio 2013\Projects\Spiderman\Spiderman\obj\Debug\Spiderman.mainForm.resources
+c:\users\jake\documents\visual studio 2013\Projects\Spiderman\Spiderman\bin\Debug\HtmlAgilityPack.dll
+c:\users\jake\documents\visual studio 2013\Projects\Spiderman\Spiderman\bin\Debug\HtmlAgilityPack.pdb
+c:\users\jake\documents\visual studio 2013\Projects\Spiderman\Spiderman\bin\Debug\HtmlAgilityPack.xml
